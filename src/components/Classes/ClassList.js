@@ -12,8 +12,13 @@ const ClassList = () => {
 
     const fetchClasses = async () => {
         try {
-            const response = await axios.get('/class');
-            setClasses(response.data);
+            const response = await fetch('http://98.84.2.112/faiq/api/class', {
+                headers: { "content-type": "application/json" }
+            });
+            const classData = await response.json()
+            console.log("class data=> ", classData);
+
+            setClasses(classData);
         } catch (error) {
             console.error('Error fetching classes:', error);
         }
