@@ -49,11 +49,17 @@ const StudentList = () => {
                         <tr key={stu._id}>
                             <td>{stu.name}</td>
                             <td>{stu.rollNumber}</td>
-                            <td>{stu.class.name}</td>
-                            <td>{stu.section.name}</td>
+                            {/* Optional chaining to safely access class and section names */}
+                            <td>{stu.class?.name || 'No Class Assigned'}</td>
+                            <td>{stu.section?.name || 'No Section Assigned'}</td>
                             <td>
                                 <Link to={`/students/edit/${stu._id}`} className="btn btn-warning btn-sm me-2">Edit</Link>
-                                <button onClick={() => deleteStudent(stu._id)} className="btn btn-danger btn-sm">Delete</button>
+                                <button
+                                    onClick={() => deleteStudent(stu._id)}
+                                    className="btn btn-danger btn-sm"
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}

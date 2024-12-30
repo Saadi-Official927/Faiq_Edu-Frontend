@@ -48,12 +48,18 @@ const DiaryList = () => {
                     {diaries.map(diary => (
                         <tr key={diary._id}>
                             <td>{new Date(diary.date).toLocaleDateString()}</td>
-                            <td>{diary.class.name}</td>
-                            <td>{diary.section.name}</td>
+                            {/* Use optional chaining and fallback */}
+                            <td>{diary.class?.name || 'No Class Assigned'}</td>
+                            <td>{diary.section?.name || 'No Section Assigned'}</td>
                             <td>{diary.content}</td>
                             <td>
                                 <Link to={`/diaries/edit/${diary._id}`} className="btn btn-warning btn-sm me-2">Edit</Link>
-                                <button onClick={() => deleteDiary(diary._id)} className="btn btn-danger btn-sm">Delete</button>
+                                <button
+                                    onClick={() => deleteDiary(diary._id)}
+                                    className="btn btn-danger btn-sm"
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}

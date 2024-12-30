@@ -46,7 +46,8 @@ const SubjectList = () => {
                     {subjects.map(sub => (
                         <tr key={sub._id}>
                             <td>{sub.name}</td>
-                            <td>{sub.class.name}</td>
+                            {/* Use optional chaining to avoid crashing */}
+                            <td>{sub.class?.name || 'No Class Assigned'}</td>
                             <td>
                                 <Link to={`/subjects/edit/${sub._id}`} className="btn btn-warning btn-sm me-2">Edit</Link>
                                 <button onClick={() => deleteSubject(sub._id)} className="btn btn-danger btn-sm">Delete</button>

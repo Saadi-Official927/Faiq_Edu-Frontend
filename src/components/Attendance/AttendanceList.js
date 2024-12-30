@@ -49,13 +49,19 @@ const AttendanceList = () => {
                     {attendanceRecords.map(att => (
                         <tr key={att._id}>
                             <td>{new Date(att.date).toLocaleDateString()}</td>
-                            <td>{att.class.name}</td>
-                            <td>{att.section.name}</td>
-                            <td>{att.studentsPresent.length}</td>
-                            <td>{att.studentsAbsent.length}</td>
+                            {/* Use optional chaining and fallback */}
+                            <td>{att.class?.name || 'No Class Assigned'}</td>
+                            <td>{att.section?.name || 'No Section Assigned'}</td>
+                            <td>{att.studentsPresent?.length || 0}</td>
+                            <td>{att.studentsAbsent?.length || 0}</td>
                             <td>
                                 <Link to={`/attendance/edit/${att._id}`} className="btn btn-warning btn-sm me-2">Edit</Link>
-                                <button onClick={() => deleteAttendance(att._id)} className="btn btn-danger btn-sm">Delete</button>
+                                <button
+                                    onClick={() => deleteAttendance(att._id)}
+                                    className="btn btn-danger btn-sm"
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}

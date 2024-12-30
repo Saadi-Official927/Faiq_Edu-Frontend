@@ -47,17 +47,24 @@ const SectionList = () => {
                     {sections.map(sec => (
                         <tr key={sec._id}>
                             <td>{sec.name}</td>
-                            <td>{sec.class.name}</td>
-                            <td>{sec.students.length}</td>
+                            <td>{sec.class?.name || 'No Class Assigned'}</td>
+                            <td>{sec.students ? sec.students.length : 0}</td>
                             <td>
                                 <Link to={`/sections/edit/${sec._id}`} className="btn btn-warning btn-sm me-2">Edit</Link>
-                                <button onClick={() => deleteSection(sec._id)} className="btn btn-danger btn-sm">Delete</button>
+                                <button
+                                    onClick={() => deleteSection(sec._id)}
+                                    className="btn btn-danger btn-sm"
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}
                     {sections.length === 0 && (
                         <tr>
-                            <td colSpan="4" className="text-center">No sections found.</td>
+                            <td colSpan="4" className="text-center">
+                                No sections found.
+                            </td>
                         </tr>
                     )}
                 </tbody>
